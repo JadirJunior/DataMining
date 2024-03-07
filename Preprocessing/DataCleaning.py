@@ -65,6 +65,14 @@ def main():
     for c in columns_missing_value:
         UpdateMissingValues(df, c)
     
+    
+    # Code for change categoric values into numeric
+    # for c in df.columns:
+    #     if (c != "Poisonous"):
+    #         convert_categoric_numeric(df, c)
+
+    
+
     print(df.describe())
     print("\n")
     print(df.head(15))
@@ -91,6 +99,10 @@ def UpdateMissingValues(df, column, method="mode", number=0):
         # Substituindo valores ausentes pela moda
         mode = df[column].mode()[0]
         df[column].fillna(mode, inplace=True)
+
+
+def convert_categoric_numeric(df, column):
+    df[column] = pd.factorize(df[column])[0]
 
 
 if __name__ == "__main__":
