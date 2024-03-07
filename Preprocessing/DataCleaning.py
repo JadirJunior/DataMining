@@ -28,7 +28,31 @@ def main():
             'Population',
             'Habitat'
             ] 
-    features = names
+    features = [
+            'Poisonous', 
+            'Cap-Shape', 
+            'Cap-Surface',
+            'Cap-Color',
+            'Bruises',
+            'Odor',
+            'Gill-Attachment',
+            'Gill-Spacing',
+            'Gill-Size',
+            'Gill-Color',
+            'Stalk-Shape',
+            #'Stalk-Root',
+            'Stalk-Surface-Above-Ring',
+            'Stalk-Surface-Bellow-Ring',
+            'Stalk-Color-Above-Ring',
+            'Stalk-Color-Bellow-Ring',
+            'Veil-Type',
+            'Veil-Color',
+            'Ring-Number',
+            'Ring-Type',
+            'Spore-Print-Color',
+            'Population',
+            'Habitat'
+    ]
     output_file = 'DataSets/Mushrooms.data'
     input_file = 'DataSets/agaricus-lepiota.data'
     df = pd.read_csv(input_file,         # Nome do arquivo com dados
@@ -66,10 +90,10 @@ def main():
         UpdateMissingValues(df, c)
     
     
-    # Code for change categoric values into numeric
-    # for c in df.columns:
-    #     if (c != "Poisonous"):
-    #         convert_categoric_numeric(df, c)
+    # Code for change categorical values into numeric
+    for c in df.columns:
+        if c != 'Poisonous':
+            convert_categoric_numeric(df, c)
 
     
 
