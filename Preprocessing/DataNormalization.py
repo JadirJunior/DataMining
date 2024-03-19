@@ -87,6 +87,6 @@ def ShowInformationDataFrame(df, message=""):
     print(df.head(10))
     print("\n") 
 
-
+    
 if __name__ == "__main__":
     main()
