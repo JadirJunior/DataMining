@@ -36,41 +36,43 @@ def main():
 
 
 
-    input_file = 'DataSets/Mushrooms.data'
+    input_file = 'DataSets/MushroomsNumeric.data'
 
 
 
-    df = pd.read_csv(input_file,    # Nome do arquivo com dados
+    df = pd.read_csv(input_file,
                         names = names)
     
-    
-    
-    # plt.scatter(df['Cap_Surface'], df['Poisonous'])
-    # plt.show()
 
-    #fig, ax = plt.subplots()
-
-    num_col = ['Cap_Surface','Cap_Shape', 'Veil_Color', 'Bruises']
+    num_col = names
+    columns = 3
+    f, axes = plt.subplots(8, columns, figsize=(20,5), sharey = True) 
     
-    f, axes = plt.subplots(len(num_col), 1, figsize=(20,5), sharey = True) 
+    column = 0
+    cont = 1
+    line = 0
 
-    #print(len(names))
-
-    
-    
     for i,col in enumerate(num_col):
-        #axes[i] = plt.subplot(1,2,i+1)
         print(col)
-        s = sb.countplot(x=col, data = df, hue='Poisonous', alpha=0.7, ax=axes[i])
-        s.legend(loc="upper right", prop={'size': 10})
+        s = sb.countplot(x=col, data = df, hue='Poisonous', alpha=0.7, ax=axes[line][column])
+        s.legend(loc="upper right", prop={'size': 4})
 
+        res = cont % 8
+        print(res)
+        if ( res == 0):
+            column += 1
+            line = 0
+        else:
+            line += 1
+        cont += 1
         
-        # for p in s.patches:
-        #     s.annotate(format(p.get_height(), '.0f'), 
-        #     (p.get_x() + p.get_width() / 2., p.get_height()), 
-        #     ha = 'center', va = 'center', 
-        #     xytext = (0, 5), 
-        #     textcoords = 'offset points')
+        
+        for p in s.patches:
+            s.annotate(format(p.get_height(), '.0f'), 
+            (p.get_x() + p.get_width() / 2., p.get_height()), 
+            ha = 'center', va = 'center', 
+            xytext = (0, 5), 
+            textcoords = 'offset points')
 
     plt.show()
 
