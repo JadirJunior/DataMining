@@ -5,8 +5,9 @@ A Project using a Mushrooms DataSet available in: https://archive.ics.uci.edu/da
 
 https://www.kaggle.com/code/sahistapatel96/mushroom-classification
 
-<iframe src="https://www.kaggle.com/embed/sahistapatel96/mushroom-classification?cellIds=4&kernelSessionId=51326635" height="300" style="margin: 0 auto; width: 100%; max-width: 950px;" frameborder="0" scrolling="auto" title="Mushroom Classification"></iframe>
-
+<div style="display: inline-block">
+  <iframe src="https://www.kaggle.com/embed/sahistapatel96/mushroom-classification?cellIds=4&kernelSessionId=51326635" height="300" style="margin: 0 auto; width: 100%; max-width: 950px;" frameborder="0" scrolling="auto" title="Mushroom Classification"></iframe>
+</div> <br />
 # Objective
 - Find out which mushrooms are poisonous and which are edible
 
