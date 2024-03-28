@@ -7,7 +7,7 @@ https://www.kaggle.com/code/sahistapatel96/mushroom-classification
 
 <div style="display: inline-block">
 
-  <iframe src="https://www.kaggle.com/code/sahistapatel96/mushroom-classification?scriptVersionId=51326635&cellId=4" height="300">
+  <iframe src="https://www.researchgate.net/publication/352878106/figure/fig1/AS:1040690653958150@1625131395861/Structure-of-a-typical-mushroom-with-common-features-30-KERALA-KARSHAKAN-e-journal.png" height="300">
   </iframe>
 
   <!-- <img align="center" alt="Java" src="https://www.kaggle.com/code/sahistapatel96/mushroom-classification?scriptVersionId=51326635&cellId=4"> -->
