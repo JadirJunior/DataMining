@@ -17,16 +17,19 @@ def main():
             'Cap_Color',
             'Bruises',
             'Odor',
+
             'Gill_Attachment',
             'Gill_Spacing',
             'Gill_Size',
             'Gill_Color',
             'Stalk_Shape',
+
             'Stalk_Surface_Above_Ring',
             'Stalk_Surface_Bellow_Ring',
             'Stalk_Color_Above_Ring',
             'Stalk_Color_Bellow_Ring',
             'Veil_Type',
+
             'Veil_Color',
             'Ring_Number',
             'Ring_Type',
@@ -39,27 +42,32 @@ def main():
   
   input_file = 'DataSets/Mushrooms.data'
 
-  df = pd.read_csv(input_file,    # Nome do arquivo com dados
-                     names = names) # Nome das colunas    
 
-  frequency = df['Cap_Shape'].value_counts()
 
-  frequency.plot(kind='bar', xlabel='Cap_Shape', ylabel='Frequency', title='Frequency Distribution of Cap_Shape')
+  df = pd.read_csv(input_file,
+                      names = names)
+  
+
+  num_col = [
+      'Habitat'
+  ]
+
+  f, axes = plt.subplots(5, 1, figsize=(20,5), sharey = True) 
+  
+  
+  for i,col in enumerate(num_col):
+      s = sb.countplot(x=col, data = df, hue='Poisonous', alpha=0.7, ax=axes[i])
+      s.legend(loc="upper right", prop={'size': 4})
+      
+      
+      for p in s.patches:
+          s.annotate(format(p.get_height(), '.0f'), 
+          (p.get_x() + p.get_width() / 2., p.get_height()), 
+          ha = 'center', va = 'center', 
+          xytext = (0, 5), 
+          textcoords = 'offset points')
+
   plt.show()
-
-  # ax = plt.axes(projection='3d')
-
-  # # Data for a three-dimensional line
-  # zline = frequency.keys()
-  # xline = frequency.tolist()
-  # yline = 0
-
-  # # Data for three-dimensional scattered points
-  # zdata = 15 * np.random.random(100)
-  # xdata = np.sin(zdata) + 0.1 * np.random.randn(100)
-  # ydata = np.cos(zdata) + 0.1 * np.random.randn(100)
-  # ax.scatter3D(xdata, ydata, zdata, c=zdata, cmap='Greens')
-  # plt.show()
 
 def setClasses():
     Poisonous = dict(p = 'Poisonous', e = 'Edible')

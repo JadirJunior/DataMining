@@ -36,7 +36,7 @@ def main():
 
 
 
-    input_file = 'DataSets/MushroomsNumeric.data'
+    input_file = 'DataSets/Mushrooms.data'
 
 
 
