@@ -1,7 +1,10 @@
 # DataMining Project
 
+A Project using a Mushrooms DataSet available in  
+
 https://www.kaggle.com/code/sahistapatel96/mushroom-classification
 
+<iframe src="https://www.kaggle.com/embed/sahistapatel96/mushroom-classification?cellIds=4&kernelSessionId=51326635" height="300" style="margin: 0 auto; width: 100%; max-width: 950px;" frameborder="0" scrolling="auto" title="Mushroom Classification"></iframe>
 
 # Descriptive Analysis
 
