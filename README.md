@@ -7,9 +7,10 @@ https://www.kaggle.com/code/sahistapatel96/mushroom-classification
 
 <div style="display: inline-block">
 
-  <!-- <iframe src="https://www.kaggle.com/code/sahistapatel96/mushroom-classification?scriptVersionId=51326635&cellId=4" height="300">
-  </iframe> -->
-  <img align="center" alt="Java" src="https://www.kaggle.com/code/sahistapatel96/mushroom-classification?scriptVersionId=51326635&cellId=4">
+  <iframe src="https://www.kaggle.com/code/sahistapatel96/mushroom-classification?scriptVersionId=51326635&cellId=4" height="300">
+  </iframe>
+
+  <!-- <img align="center" alt="Java" src="https://www.kaggle.com/code/sahistapatel96/mushroom-classification?scriptVersionId=51326635&cellId=4"> -->
 
 </div> <br />
 
