@@ -6,6 +6,7 @@ from sklearn.datasets import load_digits
 from sklearn.decomposition import PCA
 from sklearn.cluster import KMeans
 from sklearn.metrics import silhouette_score
+from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import silhouette_samples
 import matplotlib.pyplot as plt
 import pandas as pd
@@ -55,9 +56,12 @@ def show_digitsdataset(digits, target):
 def plot_samples(projected, labels, title):    
     fig = plt.figure()
     u_labels = np.unique(labels)
-    for i in u_labels:
-        plt.scatter(projected[labels == i , 0] , projected[labels == i , 1] , label = i,
-                    edgecolor='none', alpha=0.5, cmap=plt.cm.get_cmap('tab10', 10))
+    cmap = plt.cm.get_cmap('tab10')
+
+    for idx, label in enumerate(u_labels):
+        color = cmap(idx / len(u_labels))  # Obter a cor correspondente do colormap
+        plt.scatter(projected[labels == label, 0], projected[labels == label, 1], label=label,
+                edgecolor='none', alpha=0.5, color=color)
     plt.xlabel('component 1')
     plt.ylabel('component 2')
     plt.legend()
@@ -119,31 +123,32 @@ def main():
     target = 'Poisonous'
 
     digits = pd.read_csv(input_file, names=names)
-    # show_digitsdataset(digits, target);
 
 
     x = digits.loc[:, features].values
 
+    # Normalization
+    x_zcore = StandardScaler().fit_transform(x)
+    normalized1Df = pd.DataFrame(data = x_zcore, columns = features)
+    normalized1Df = pd.concat([normalized1Df, digits[[target]]], axis = 1)
+
+
     #Transform the data using PCA
     pca = PCA(2)
-    projected = pca.fit_transform(x)
-    print(pca.explained_variance_ratio_)
-    print(digits.shape)
-    print(projected.shape)    
-    plot_samples(projected, target, 'Original Labels')
- 
-    #Applying our kmeans function from scratch
-    labels = KMeans_scratch(projected,6,5)
-    
-    #Visualize the results 
-    plot_samples(projected, labels, 'Clusters Labels KMeans from scratch')
+    projected = pca.fit_transform(x_zcore)
+    # print(pca.explained_variance_ratio_)
+    # print(digits.shape)
+    # print(projected.shape)    
+    # plot_samples(projected, target, 'Original Labels')
+
+    clusters = 2
 
     #Applying sklearn kemans function
-    kmeans = KMeans(n_clusters=6).fit(projected)
+    kmeans = KMeans(n_clusters=clusters).fit(projected)
     print(kmeans.inertia_)
     centers = kmeans.cluster_centers_
     score = silhouette_score(projected, kmeans.labels_)    
-    print("For n_clusters = {}, silhouette score is {})".format(10, score))
+    print("For n_clusters = {}, silhouette score is {})".format(clusters, score))
 
     #Visualize the results sklearn
     plot_samples(projected, kmeans.labels_, 'Clusters Labels KMeans from sklearn')
