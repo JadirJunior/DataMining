@@ -70,12 +70,10 @@ def main():
     y = df.loc[:, [target]].values
 
 
-    
-    # Standardizing the features
     x = StandardScaler().fit_transform(x)
-    normalizedDf = pd.DataFrame(data = x, columns = features)
-    normalizedDf = pd.concat([normalizedDf, df[[target]]], axis = 1)
-    ShowInformationDataFrame(normalizedDf,"Dataframe Normalized")
+    normalized1Df = pd.DataFrame(data = x, columns = features)
+    normalized1Df = pd.concat([normalized1Df, df[[target]]], axis = 1)
+    ShowInformationDataFrame(normalized1Df,"Dataframe Z-Score Normalized")
 
     # PCA projection
     pca = PCA()    

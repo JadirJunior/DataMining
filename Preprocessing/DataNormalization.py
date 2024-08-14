@@ -80,6 +80,7 @@ def main():
     ShowInformationDataFrame(normalized2Df,"Dataframe Min-Max Normalized")
 
 
+    
 def ShowInformationDataFrame(df, message=""):
     print(message+"\n")
     print(df.info())

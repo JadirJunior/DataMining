@@ -22,34 +22,6 @@ def distancia_euclideana(vet1, vet2):
   distancia = distancia**(1/2)
   return distancia
 
-
-def retorna_vizinhos(base_treinamento, amostra_teste, k):
-  distancias = []
-
-  #Calcula a distância para toda base de treinamento
-
-  for i in base_treinamento:
-    dist = distancia_euclideana(amostra_teste, i)
-    distancias.append((i, dist))
-  
-  distancias.sort(key=lambda tup: tup[1])
-
-  vizinhos = []
-  #Retorna os k vizinhos mais próximos
-  for i in range(k):
-    vizinhos.append(distancias[i][0])
-  
-  return vizinhos
-
-
-def classifica(base_treinamento, amostra_teste, k):
-  vizinhos = retorna_vizinhos(base_treinamento, amostra_teste, k)
-  rotulos = [v[-1] for v in vizinhos]
-  print(rotulos)
-  predicao = max(set(rotulos), key=rotulos.count)
-  return predicao
-
-
 def knn_predict(X_train, X_test, y_train, y_test, k, p):
   y_hat_test = []
 
@@ -111,7 +83,7 @@ def plot_confusion_matrix(cm, classes,
 
     plt.tight_layout()
     plt.ylabel('True label')
-    plt.xlabel('Predicted label')    
+    plt.xlabel('Predicted label')
 
 
 def main():
@@ -160,23 +132,17 @@ def main():
   X_train = scaler.fit_transform(X_train)
   X_test = scaler.transform(X_test)
 
-  y_mush_test = knn_predict(X_train, X_test, y_train, y_test, k=5, p=2)
-
+  y_mush_test = knn_predict(X_train, X_test, y_train, y_test, k=4, p=2)
 
   accuracy = accuracy_score(y_test, y_mush_test)*100
   f1 = f1_score(y_test, y_mush_test, average='macro')
   print("Acurracy K-NN from scratch: {:.2f}%".format(accuracy))
   print("F1 Score K-NN from scratch: {:.2f}%".format(f1))
 
-  # cm = confusion_matrix(y_test, y_mush_test)        
-  # plot_confusion_matrix(cm, df, False, "Confusion Matrix - K-NN")      
-  # plot_confusion_matrix(cm, df, True, "Confusion Matrix - K-NN normalized")
-
-
-
-  # p = classifica(treinamento, teste, 3)
-  # print('Resultado da classificação')
-  # print('Rótulo Esperado: %i\nRótulo Predição: %i\n' % (teste[-1], p) )
+  cm = confusion_matrix(y_test, y_mush_test)
+  plot_confusion_matrix(cm, y.unique(), False, "Confusion Matrix - K-NN")      
+  plot_confusion_matrix(cm, y.unique(), True, "Confusion Matrix - K-NN normalized")
+  plt.show()
 
 if __name__ == '__main__':
   main()

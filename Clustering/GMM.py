@@ -8,6 +8,7 @@ from sklearn.mixture import GaussianMixture
 from sklearn.metrics import silhouette_score
 from sklearn.metrics import silhouette_samples
 import matplotlib.pyplot as plt
+import pandas as pd
 
 def show_digitsdataset(digits):
     fig = plt.figure(figsize=(6, 6))  # figure size in inches
@@ -33,20 +34,75 @@ def plot_samples(projected, labels, title):
     plt.title(title)
 
 def main():
-    #Load dataset Digits
-    digits = load_digits()
-    show_digitsdataset(digits)
+
+    input_file = 'DataSets/MushroomsNumeric.data'
+    names = [ 
+        'Poisonous',
+        'Cap_Shape', 
+        'Cap_Surface',
+        'Cap_Color',
+        'Bruises',
+        'Odor',
+        'Gill_Attachment',
+        'Gill_Spacing',
+        'Gill_Size',
+        'Gill_Color',
+        'Stalk_Shape',
+        'Stalk_Surface_Above_Ring',
+        'Stalk_Surface_Bellow_Ring',
+        'Stalk_Color_Above_Ring',
+        'Stalk_Color_Bellow_Ring',
+        'Veil_Type',
+        'Veil_Color',
+        'Ring_Number',
+        'Ring_Type',
+        'Spore_Print_Color',
+        'Population',
+        'Habitat'
+      ]
+    
+    features = [ 
+        'Cap_Shape', 
+        'Cap_Surface',
+        'Cap_Color',
+        'Bruises',
+        'Odor',
+        'Gill_Attachment',
+        'Gill_Spacing',
+        'Gill_Size',
+        'Gill_Color',
+        'Stalk_Shape',
+        'Stalk_Surface_Above_Ring',
+        'Stalk_Surface_Bellow_Ring',
+        'Stalk_Color_Above_Ring',
+        'Stalk_Color_Bellow_Ring',
+        'Veil_Type',
+        'Veil_Color',
+        'Ring_Number',
+        'Ring_Type',
+        'Spore_Print_Color',
+        'Population',
+        'Habitat'
+      ]
+    
+    target = 'Poisonous'
+
+    digits = pd.read_csv(input_file, names=names)
+
+
+    x = digits.loc[:, features].values
+    y = digits.loc[:,[target]].values
     
     #Transform the data using PCA
     pca = PCA(2)
-    projected = pca.fit_transform(digits.data)
+    projected = pca.fit_transform(x)
     print(pca.explained_variance_ratio_)
-    print(digits.data.shape)
+    print(digits.shape)
     print(projected.shape)    
-    plot_samples(projected, digits.target, 'Original Labels') 
+    plot_samples(projected, target, 'Original Labels') 
     
     #Applying sklearn GMM function
-    gm  = GaussianMixture(n_components=10).fit(projected)
+    gm  = GaussianMixture(n_components=2).fit(projected)
     print(gm.weights_)
     print(gm.means_)
     x = gm.predict(projected)

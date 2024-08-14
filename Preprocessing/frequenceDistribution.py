@@ -49,7 +49,11 @@ def main():
   
 
   num_col = [
-      'Habitat'
+      'Odor',
+      'Stalk_Color_Above_Ring',
+      'Veil_Color',
+      'Ring_Type',
+      'Population'
   ]
 
   f, axes = plt.subplots(5, 1, figsize=(20,5), sharey = True) 
@@ -57,7 +61,7 @@ def main():
   
   for i,col in enumerate(num_col):
       s = sb.countplot(x=col, data = df, hue='Poisonous', alpha=0.7, ax=axes[i])
-      s.legend(loc="upper right", prop={'size': 4})
+      s.legend(loc="upper right", prop={'size': 8})
       
       
       for p in s.patches:
