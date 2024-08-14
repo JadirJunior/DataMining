@@ -115,6 +115,7 @@ def main():
       'Habitat'
     ]
   
+  
   target = 'Poisonous'
   df = pd.read_csv(input_file,    # Nome do arquivo com dados
                     names = names) # Nome das colunas    
